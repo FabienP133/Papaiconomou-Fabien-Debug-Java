@@ -1,4 +1,9 @@
 package com.hemebiotech.analytics;
 
-public class ISymptomWriter {
+import java.util.Map;
+
+public interface ISymptomWriter {
+
+    void writeSymptoms(Map<String, Integer> symptoms);
+
 }
