@@ -17,9 +17,7 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
         if (filepath == null || symptoms == null) {
             System.err.println("le chemin vers le fichier ou les symptomes ne sont pas bons");
             return;
-
         }
-
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
 
@@ -27,10 +25,11 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
                 writer.write(symptom.getKey() + " : " + symptom.getValue());
                 writer.newLine();
             }
+            writer.close();
+
             System.out.println("Les symptomes sont dans le fichier " + filepath);
         } catch (IOException e) {
             System.err.println("Impossible d'écrire dans le fichier " + e.getMessage());
         }
-
     }
 }
