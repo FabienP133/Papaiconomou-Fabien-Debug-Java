@@ -15,16 +15,27 @@ public class AnalyticsCounter {
 	private ISymptomReader reader;
 	private ISymptomWriter writer;
 
-	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) { //là ya le constructeur donc ca c'est bon
+
+/**
+ * Constructeur de la classe AnalyticsCounter
+ * */
+	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
 		this.reader = reader;
 		this.writer = writer;
 	}
 
-	public List<String> GetSymptoms() { //là j'ai recup la liste des symptomes dans le fichier et le return donne la liste
-		return reader.GetSymptoms();
+	/**
+	 * Récupère la liste des symptomes
+     */
+	public List<String> getSymptoms() {
+		return reader.getSymptoms();
 	}
 
-	public Map<String, Integer> countSymptoms(List<String> symptoms) { //là j'ai compté les occurences, j'ai créé une map que j'ap appelé symptomcount et j'ai utilisé chat pour la fin
+
+	/**
+	 * Compte les occurrences de chaque symptomes dans la liste
+     */
+	public Map<String, Integer> countSymptoms(List<String> symptoms) {
 		Map<String, Integer> symptomcount = new HashMap<>();
 		for (String symptom : symptoms) {
 			symptomcount.put(symptom, symptomcount.getOrDefault(symptom, 0) + 1);
@@ -32,15 +43,25 @@ public class AnalyticsCounter {
 		return symptomcount;
 	}
 
-	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) { //ordre alphabétique
+
+	/**
+	 *Trie les symptomes par ordre alphabétique
+	 */
+	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) {
 		return new TreeMap<>(symptoms);
 	}
 
-	public void writeSymptoms (Map<String, Integer> symptoms) { //là jai re écrit les symptomes mais triés et avec leurs occurences
+
+	/**
+	 *Ecrit les symptômes triés et leurs occurrences dans un fichier via le writer
+	 */
+	public void writeSymptoms (Map<String, Integer> symptoms) {
 		writer.writeSymptoms(symptoms);
 	}
 
-	
+	/**
+	 * Cette méthode lit le fichier des symptômes à partir de "symptoms.txt", compte les occurences puis écrit les résultats dans "result.out"
+	 */
 	public static void main(String args[]) throws Exception {
 		// first get input
 		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
@@ -59,10 +80,9 @@ public class AnalyticsCounter {
 				pupilCount++;
 			}
 
-			line = reader.readLine();	// get another symptom
+			line = reader.readLine();
 		}
-		
-		// next generate output
+
 		FileWriter writer = new FileWriter ("result.out");
 		writer.write("headache: " + headacheCount + "\n");
 		writer.write("rash: " + rashCount + "\n");

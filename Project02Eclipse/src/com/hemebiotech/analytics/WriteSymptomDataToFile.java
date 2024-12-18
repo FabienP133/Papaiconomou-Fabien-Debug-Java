@@ -12,6 +12,13 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
         this.filepath = filepath;
     }
 
+
+    /**
+     * Écrit les symptômes et leur occurrence dans un fichier texte
+     * Chaque symptôme est suivi de son nombre d'occurrences, avec "symptôme : valeur"
+     * Si le chemin du fichier ou la map de symptômes est null, un message d'erreur est affiché et l'écriture est interrompue
+     * En cas d'erreur d'écriture dans le fichier, une exception est gérée
+     */
     @Override
     public void writeSymptoms(Map<String, Integer> symptoms) {
         if (filepath == null || symptoms == null) {
